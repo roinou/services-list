@@ -8,5 +8,5 @@ import {SiteService} from "./site.service";
   providers: [SiteService]
 })
 export class AppComponent {
-  title = 'Site list';
+  title = 'Services List';
 }
