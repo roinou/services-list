@@ -1,13 +1,23 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import {SiteListComponent} from "./site-list/site-list.component";
+import {SiteDetailComponent} from "./site-detail/site-detail.component";
+import {InMemoryDataService} from "./in-memory-data.service";
+import {InMemoryWebApiModule} from "angular-in-memory-web-api";
+import {HttpModule} from "@angular/http";
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        HttpModule,
+        InMemoryWebApiModule.forRoot(InMemoryDataService)
+      ],
       declarations: [
         AppComponent,
-        SiteListComponent
-      ],
+        SiteListComponent,
+        SiteDetailComponent
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {

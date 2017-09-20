@@ -1,11 +1,20 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { SiteService } from './site.service';
+import {InMemoryWebApiModule} from "angular-in-memory-web-api";
+import {InMemoryDataService} from "./in-memory-data.service";
+import {HttpModule} from "@angular/http";
 
 describe('SiteService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [SiteService]
+      imports: [
+        HttpModule,
+        InMemoryWebApiModule.forRoot(InMemoryDataService)
+      ],
+      providers: [
+        SiteService
+      ]
     });
   });
 

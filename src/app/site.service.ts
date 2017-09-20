@@ -1,18 +1,23 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {Http} from "@angular/http";
 import {Site} from "./site";
+import "rxjs/add/operator/toPromise";
 
 @Injectable()
 export class SiteService {
 
-  private sitesCache: Site[];
-
-  constructor() {
-    this.sitesCache = [];
-    this.sitesCache.push({name: 'test', url: 'testUrl'});
-    this.sitesCache.push({name: 'test2', url: 'test2Url'});
+  constructor(private http: Http) {
   }
 
-  getSites(): Site[] {
-    return this.sitesCache;
+  getSites(): Promise<Site[]> {
+    return this.http.get('/api/sites')
+      .toPromise()
+      .then(response => response.json().data as Site[])
+      .catch(this.handleError);
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
   }
 }

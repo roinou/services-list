@@ -4,7 +4,7 @@ import {SiteService} from "../site.service"
 
 @Component({
   selector: 'site-list',
-  template: '<ul><li *ngFor="let site of sites">{{site.name}}</li></ul>',
+  template: '<ul><site-detail *ngFor="let site of sites" [site]="site"></site-detail></ul>',
   styleUrls: ['./site-list.component.styl']
 })
 export class SiteListComponent implements OnInit {
@@ -15,6 +15,10 @@ export class SiteListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sites = this.listService.getSites();
+    this.getSites();
+  }
+
+  private getSites() {
+    this.listService.getSites().then(sites => this.sites = sites);
   }
 }

@@ -4,6 +4,7 @@ import { SiteListComponent } from './site-list.component';
 import {Injectable} from "@angular/core";
 import {Site} from "../site";
 import {SiteService} from "../site.service";
+import {SiteDetailComponent} from "../site-detail/site-detail.component";
 
 describe('SiteListComponent', () => {
   let component: SiteListComponent;
@@ -12,7 +13,8 @@ describe('SiteListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        SiteListComponent
+        SiteListComponent,
+        SiteDetailComponent
       ],
       providers: [{provide: SiteService, useClass: MockSiteService}]
     })
@@ -28,8 +30,12 @@ describe('SiteListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
 
+  it('should list all sites', async(() => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('ul').children.length).toEqual(2);
+  }));
+});
 
 @Injectable()
 class MockSiteService {
@@ -42,7 +48,7 @@ class MockSiteService {
     this.sitesCache.push({name: 'test2', url: 'test2Url'});
   }
 
-  getSites(): Site[] {
-    return this.sitesCache;
+  getSites(): Promise<Site[]> {
+    return Promise.resolve(this.sitesCache);
   }
 }
