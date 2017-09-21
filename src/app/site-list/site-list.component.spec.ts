@@ -32,8 +32,12 @@ describe('SiteListComponent', () => {
   });
 
   it('should list all sites', async(() => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('ul').children.length).toEqual(2);
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      const compiled = fixture.debugElement.nativeElement;
+      expect(compiled.querySelector('ul').children.length).toEqual(2);
+    });
   }));
 });
 
@@ -43,9 +47,10 @@ class MockSiteService {
   private sitesCache: Site[];
 
   constructor() {
-    this.sitesCache = [];
-    this.sitesCache.push({name: 'test', url: 'testUrl'});
-    this.sitesCache.push({name: 'test2', url: 'test2Url'});
+    this.sitesCache = [
+      {name: 'test', url: 'testUrl'},
+      {name: 'test2', url: 'test2Url'}
+    ];
   }
 
   getSites(): Promise<Site[]> {
