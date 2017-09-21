@@ -4,7 +4,7 @@ import {SiteService} from "../site.service"
 
 @Component({
   selector: 'site-list',
-  template: '<ul class="list-group"><site-detail *ngFor="let site of sites" [site]="site"></site-detail></ul>',
+  template: '<div class="list-group"><site-detail *ngFor="let site of sites" [site]="site"></site-detail></div>',
   styleUrls: ['./site-list.component.scss']
 })
 export class SiteListComponent implements OnInit {
@@ -19,6 +19,6 @@ export class SiteListComponent implements OnInit {
   }
 
   private getSites() {
-    this.listService.getSites().then(sites => this.sites = sites);
+    this.listService.getSites().subscribe(sites => this.sites = sites)
   }
 }

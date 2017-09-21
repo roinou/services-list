@@ -6,7 +6,8 @@ export class InMemoryDataService extends InMemoryDbService {
     const sites = [
       {name: "passenger", url: "testUrl"},
       {name: "lust for life", url: "test2Url"},
-      {name: "build server", url: "build.netpost"}
+      {name: "build server", url: "http://build.netpost"},
+      {name: "antenna", url: "/api/sites"}
     ];
     return {sites};
   }

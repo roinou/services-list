@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SiteDetailComponent } from './site-detail.component';
+import {SiteService} from "../site.service";
+import {Injectable} from "@angular/core";
+import {Observable} from "rxjs/Observable";
 
 describe('SiteDetailComponent', () => {
   let component: SiteDetailComponent;
@@ -8,7 +11,8 @@ describe('SiteDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SiteDetailComponent ]
+      declarations: [ SiteDetailComponent ],
+      providers: [{provide: SiteService, useClass: MockSiteService}]
     })
     .compileComponents();
   }));
@@ -24,3 +28,14 @@ describe('SiteDetailComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+
+@Injectable()
+class MockSiteService {
+
+  constructor() {}
+
+  querySite(url: string): Observable<number> {
+    return Observable.of(200);
+  }
+}
