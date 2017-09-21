@@ -4,7 +4,7 @@ import {Site} from "../site";
 @Component({
   selector: 'site-detail',
   templateUrl: './site-detail.component.html',
-  styleUrls: ['./site-detail.component.styl']
+  styleUrls: ['./site-detail.component.scss']
 })
 export class SiteDetailComponent implements OnInit {
 
