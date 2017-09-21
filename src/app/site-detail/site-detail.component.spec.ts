@@ -5,9 +5,12 @@ import {SiteService} from "../site.service";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 
+import "rxjs/add/observable/throw";
+
 describe('SiteDetailComponent', () => {
   let component: SiteDetailComponent;
   let fixture: ComponentFixture<SiteDetailComponent>;
+  let siteService: SiteService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -21,12 +24,42 @@ describe('SiteDetailComponent', () => {
     fixture = TestBed.createComponent(SiteDetailComponent);
     component = fixture.componentInstance;
     component.site = {name: 'test', url: 'http://grateful.dead'};
-    fixture.detectChanges();
+    siteService = fixture.debugElement.injector.get(SiteService);
+    // fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should be green if status is 200', () => {
+    let spy = mockStatus(200)
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('.list-group-item').classList).toContain('list-group-item-success');
+    expect(spy.calls.any()).toEqual(true);
+  });
+
+  it('should be red if status is not 200', () => {
+    let spy = mockStatus(300);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('.list-group-item').classList).toContain('list-group-item-danger');
+    expect(spy.calls.any()).toEqual(true);
+  });
+
+  it('should be red if query is in error', () => {
+    let spy = spyOn(siteService, 'querySite').and.returnValue(Observable.throw('error'));
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('.list-group-item').classList).toContain('list-group-item-danger');
+    expect(spy.calls.any()).toEqual(true);
+  });
+
+  let mockStatus = function (status: number) {
+    status = status || 200;
+    return spyOn(siteService, 'querySite').and.returnValue(Observable.of(status));
+  };
 });
 
 
