@@ -19,6 +19,9 @@ export class SiteListComponent implements OnInit {
   }
 
   private getSites() {
-    this.listService.getSites().subscribe(sites => this.sites = sites)
+    this.listService.getSites().subscribe(sites => {
+      this.sites = sites;
+      console.log(sites);
+    })
   }
 }

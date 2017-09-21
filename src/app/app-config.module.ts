@@ -2,7 +2,7 @@ import { NgModule, InjectionToken } from '@angular/core';
 
 export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 
-export interface AppConfig {
+export class AppConfig {
   siteListEndpoint: string;
 }
 

@@ -15,7 +15,7 @@ export class SiteService {
   }
 
   getSites(): Observable<Site[]> {
-    return this.http.get(this.config.siteListEndpoint).map(response => response.json().data)
+    return this.http.get(this.config.siteListEndpoint).map(response => response.json())
   }
 
   querySite(url: string): Observable<number> {
