@@ -3,6 +3,7 @@ import {inject, TestBed} from '@angular/core/testing';
 import {SiteService} from './site.service';
 import {HttpModule, XHRBackend} from "@angular/http";
 import {MockBackend} from "@angular/http/testing";
+import {AppConfigModule} from "./app-config.module";
 
 describe('SiteService', () => {
   beforeEach(() => {
@@ -10,6 +11,7 @@ describe('SiteService', () => {
       imports: [
         HttpModule,
         // InMemoryWebApiModule.forRoot(InMemoryDataService)
+        AppConfigModule
       ],
       providers: [
         SiteService,

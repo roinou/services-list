@@ -5,6 +5,7 @@ import {SiteDetailComponent} from "./site-detail/site-detail.component";
 import {InMemoryDataService} from "./in-memory-data.service";
 import {InMemoryWebApiModule} from "angular-in-memory-web-api";
 import {HttpModule} from "@angular/http";
+import {APP_CONFIG} from "./app-config.module";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -17,6 +18,9 @@ describe('AppComponent', () => {
         AppComponent,
         SiteListComponent,
         SiteDetailComponent
+      ],
+      providers: [
+        {provide: APP_CONFIG, useValue: {siteListEndpoint: '/api/sites'} },
       ]
     }).compileComponents();
   }));
