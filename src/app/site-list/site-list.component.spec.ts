@@ -1,5 +1,4 @@
 import {async, ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
-
 import {SiteListComponent} from './site-list.component';
 import {Injectable} from '@angular/core';
 import {Site} from '../site';

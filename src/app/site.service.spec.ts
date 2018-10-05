@@ -1,24 +1,25 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {SiteService} from './site.service';
-import {XHRBackend} from '@angular/http';
-import {MockBackend} from '@angular/http/testing';
 import {AppConfigModule} from './app-config.module';
-import {HttpClientModule} from '../../node_modules/@angular/common/http';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 describe('SiteService', () => {
+	let httpTestingController: HttpTestingController;
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			imports: [
-				HttpClientModule,
+				//HttpClientModule,
+				HttpClientTestingModule,
 				// InMemoryWebApiModule.forRoot(InMemoryDataService)
 				AppConfigModule
 			],
 			providers: [
 				SiteService,
-				{provide: XHRBackend, useClass: MockBackend}
+				//{provide: XHRBackend, useClass: MockBackend}
 			]
 		});
 
+		httpTestingController = TestBed.get(HttpTestingController);
 
 		/*this.injector = ReflectiveInjector.resolveAndCreate([
 			{provide: ConnectionBackend, useClass: MockBackend},
@@ -53,12 +54,12 @@ describe('SiteService', () => {
 
 		}));*/
 
-	xit('getSites() should query current service url', inject([SiteService, XHRBackend], (siteService, mockBackend) => {
-		let lastConnection;
-		mockBackend.connections.subscribe((connection: any) => lastConnection = connection);
-		siteService.getSites();
-		expect(lastConnection).toBeDefined('no http service connection at all?');
-		// expect(this.lastConnection.request.url).toMatch(/api\/heroes$/, 'url invalid');
+	it('getSites() should query current service url', inject([SiteService], (siteService) => {
+		siteService.getSites().subscribe(sites => expect(sites.length).toBe(2));
+		const req = httpTestingController.expectOne('/assets/test-site.json');
+		expect(req.request.method).toEqual('GET');
+		req.flush([{name: 'passenger', url: 'iggy'}, {name: 'lust for life', url: 'pop'}]);
+		httpTestingController.verify();
 	}));
 
 	/*it('getSites() should return some sites', fakeAsync(() => {
