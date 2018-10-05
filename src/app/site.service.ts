@@ -1,24 +1,25 @@
 import {Inject, Injectable} from '@angular/core';
-import {Http} from "@angular/http";
-import {Site} from "./site";
-import {Observable} from "rxjs/Observable";
+import {Site} from './site';
+import {APP_CONFIG, AppConfig} from './app-config.module';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
 
-import 'rxjs/add/operator/map';
-import {APP_CONFIG, AppConfig} from "./app-config.module";
 
 @Injectable()
 export class SiteService {
 
-  // private serviceUrl = '/assets/test-site.json';
+	// private serviceUrl = '/assets/test-site.json';
 
-  constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig) {
-  }
+	constructor(private http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig) {
+	}
 
-  getSites(): Observable<Site[]> {
-    return this.http.get(this.config.siteListEndpoint).map(response => response.json())
-  }
+	getSites(): Observable<Site[]> {
+		return this.http.get<Site[]>(this.config.siteListEndpoint);
+	}
 
-  querySite(url: string): Observable<number> {
-    return this.http.get(url).map(response => response.status);
-  }
+	querySite(url: string): Observable<number> {
+		return this.http.get(url, {observe: 'response'}).pipe(map(response => response.status));
+		//map(response => response.status);
+	}
 }
