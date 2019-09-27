@@ -1,0 +1,10 @@
+{
+  "/osmc/jsonrpc": {
+    "target": "http://osmc",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/osmc": ""
+    }
+  }
+}

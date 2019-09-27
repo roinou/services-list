@@ -6,18 +6,22 @@ import {AppComponent} from './app.component';
 import {SiteListComponent} from './site-list/site-list.component';
 import {SiteDetailComponent} from './site-detail/site-detail.component';
 import {AppConfigModule} from './app-config.module';
+import { KodiYoutubeComponent } from './kodi-youtube/kodi-youtube.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
 	imports: [
 		BrowserModule,
 		HttpClientModule,
 		// InMemoryWebApiModule.forRoot(InMemoryDataService)
-		AppConfigModule
+		AppConfigModule,
+		FormsModule
 	],
 	declarations: [
 		AppComponent,
 		SiteListComponent,
-		SiteDetailComponent
+		SiteDetailComponent,
+		KodiYoutubeComponent
 	],
 	providers: [],
 	bootstrap: [AppComponent]
