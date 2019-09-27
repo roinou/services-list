@@ -5,7 +5,6 @@ import {SiteService} from '../site.service';
 @Component({
 	selector: 'site-detail',
 	templateUrl: './site-detail.component.html',
-	styleUrls: ['./site-detail.component.scss']
 })
 export class SiteDetailComponent implements OnInit {
 

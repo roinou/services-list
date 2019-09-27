@@ -5,7 +5,6 @@ import {SiteService} from "../site.service"
 @Component({
   selector: 'site-list',
   template: '<div class="list-group"><site-detail *ngFor="let site of sites" [site]="site"></site-detail></div>',
-  styleUrls: ['./site-list.component.scss']
 })
 export class SiteListComponent implements OnInit {
 
