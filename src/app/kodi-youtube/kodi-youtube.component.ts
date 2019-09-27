@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-kodi-youtube',
@@ -18,7 +18,13 @@ export class KodiYoutubeComponent {
       try {
         const url = new URL(this.model.youtubeUrl);
         // console.log('url', url);
-        youtubeId = url.searchParams.get('v');
+        if (url.searchParams.has('v')) {
+          youtubeId = url.searchParams.get('v');
+        } else {
+          // assume it's a short url
+          const paths = url.pathname.split('/');
+          youtubeId = paths[paths.length -1];
+        }
       } catch (e) {
         // not a URL
         youtubeId = this.model.youtubeUrl;
