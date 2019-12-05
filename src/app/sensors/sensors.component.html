@@ -1,0 +1,6 @@
+<div class="row">
+  <div *ngFor="let name of sensorNames" class="col m-1">
+    <h3>{{name}}</h3>
+    <app-sensor [sensor]="sensors.get(name)"></app-sensor>
+  </div>
+</div>

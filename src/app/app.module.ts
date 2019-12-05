@@ -8,6 +8,17 @@ import {SiteDetailComponent} from './site-detail/site-detail.component';
 import {AppConfigModule} from './app-config.module';
 import { KodiYoutubeComponent } from './kodi-youtube/kodi-youtube.component';
 import {FormsModule} from '@angular/forms';
+import {IMqttServiceOptions, MqttModule} from 'ngx-mqtt';
+import {SensorsModule} from './sensors/sensors.module';
+
+import { environment } from '../environments/environment';
+
+export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+	hostname: environment.MQTT_CONF.hostname,
+	port: environment.MQTT_CONF.port,
+	protocol: 'wss',
+	path: environment.MQTT_CONF.target
+};
 
 @NgModule({
 	imports: [
@@ -15,7 +26,9 @@ import {FormsModule} from '@angular/forms';
 		HttpClientModule,
 		// InMemoryWebApiModule.forRoot(InMemoryDataService)
 		AppConfigModule,
-		FormsModule
+		FormsModule,
+		MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
+		SensorsModule
 	],
 	declarations: [
 		AppComponent,
