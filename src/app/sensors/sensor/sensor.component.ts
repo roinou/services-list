@@ -3,8 +3,7 @@ import {Sensor} from '../sensor.model';
 
 @Component({
   selector: 'app-sensor',
-  templateUrl: './sensor.component.html',
-  styleUrls: ['./sensor.component.scss']
+  templateUrl: './sensor.component.html'
 })
 export class SensorComponent implements OnInit {
 
