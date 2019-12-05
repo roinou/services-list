@@ -4,7 +4,7 @@ import {SiteService} from './site.service';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss'],
+	styleUrls: ['./app.component.styl'],
 	providers: [SiteService]
 })
 export class AppComponent {

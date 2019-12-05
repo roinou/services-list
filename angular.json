@@ -21,7 +21,7 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.styl"
             ],
             "scripts": []
           },
@@ -71,7 +71,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
-              "src/styles.scss"
+              "src/styles.styl"
             ],
             "assets": [
               "src/assets",
@@ -119,7 +119,7 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
-      "styleext": "scss"
+      "styleext": "styl"
     },
     "@schematics/angular:directive": {
       "prefix": "app"
