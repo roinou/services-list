@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SensorsComponent } from './sensors.component';
+import {NgxGauge} from 'ngx-gauge';
 
 describe('SensorsComponent', () => {
   let component: SensorsComponent;
@@ -8,6 +9,7 @@ describe('SensorsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [NgxGauge],
       declarations: [ SensorsComponent ]
     })
     .compileComponents();

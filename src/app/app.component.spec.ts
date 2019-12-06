@@ -6,22 +6,33 @@ import {InMemoryDataService} from './in-memory-data.service';
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {HttpClientModule} from '@angular/common/http';
 import {APP_CONFIG} from './app-config.module';
+import {SensorsComponent} from './sensors/sensors.component';
+import {KodiYoutubeComponent} from './kodi-youtube/kodi-youtube.component';
+import {FormsModule} from '@angular/forms';
+import {SensorComponent} from './sensors/sensor/sensor.component';
+import {NgxGauge, NgxGaugeModule} from 'ngx-gauge';
+import {MqttModule} from 'ngx-mqtt';
 
 describe('AppComponent', () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			imports: [
+				NgxGaugeModule,
+				FormsModule,
 				HttpClientModule,
+				MqttModule.forRoot({}),
 				InMemoryWebApiModule.forRoot(InMemoryDataService)
 			],
 			declarations: [
 				AppComponent,
 				SiteListComponent,
-				SiteDetailComponent
+				SiteDetailComponent,
+				KodiYoutubeComponent,
+				SensorsComponent,
+				SensorComponent
 			],
 			providers: [
-				{provide: APP_CONFIG, useValue: {siteListEndpoint: '/api/sites'}},
-
+				{provide: APP_CONFIG, useValue: {siteListEndpoint: '/api/sites'}}
 			]
 		}).compileComponents();
 	}));
