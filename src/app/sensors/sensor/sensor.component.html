@@ -1,3 +1,14 @@
-<p>{{sensor.temperature}}</p>
-<p>{{sensor.humidity}}</p>
-<p *ngIf="sensor.pressure">{{sensor.pressure}}</p>
+<ngx-gauge
+        [value]="sensor.temperature"
+        append="°C"
+        foregroundColor="red" label="temperature"
+        max="50" min="-10" type="semi"></ngx-gauge>
+<ngx-gauge
+        [value]="sensor.humidity"
+        append="%"
+        foregroundColor="blue" label="humidity"
+        max="100" min="0" type="full"></ngx-gauge>
+<ngx-gauge *ngIf="sensor.pressure"
+           [value]="sensor.pressure"
+           foregroundColor="green" label="pressure"
+           max="1060" min="960" type="arch"></ngx-gauge>

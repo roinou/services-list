@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { SensorsComponent } from './sensors.component';
 import { SensorComponent } from './sensor/sensor.component';
+import {NgxGaugeModule} from 'ngx-gauge';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+	imports: [
+		CommonModule,
+		NgxGaugeModule
+	],
   declarations: [SensorsComponent, SensorComponent],
   exports: [SensorsComponent, SensorComponent]
 })
